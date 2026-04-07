@@ -30,9 +30,10 @@ docker compose up -d --build
 
 ### Entités Redis
 
-- [ ] Créer une entité `Book` (id, title, author, description, publishedAt, price)
+- [ ] Créer une entité `Book` (id, title, author (qui est un User), enabled, category, description, publishedAt, price)
+- [ ] Créer une entité `Category` (id, title)
 - [ ] Créer une entité `User` (id, name, email, age, createdAt)
-- [ ] Créer une entité `Product` (id, name, category, price, stock, createdAt)
+- [ ] Créer une entité `Comment` (id, author, book, content, createdAt)
 - [ ] Vérifier le mapping avec les attributs `#[RedisOm\Entity]`, `#[RedisOm\Id]`, `#[RedisOm\Property]`
 - [ ] Indexer les champs pertinents pour la recherche (`index: true`)
 - [ ] Lancer la migration : `bin/console redis-om:migrate`
@@ -41,8 +42,14 @@ docker compose up -d --build
 
 - [ ] Créer un `BookController` avec CRUD complet (list, create, show, edit, delete)
 - [ ] Créer un `UserController` avec CRUD complet
-- [ ] Créer un `ProductController` avec CRUD complet
-- [ ] Créer les `FormType` associés (BookType, UserType, ProductType)
+- [ ] Créer un `CategoryController` avec CRUD complet
+- [ ] Créer les `FormType` associés (BookType, UserType, CategoryType)
+- [ ] Toute la partie CRUD préfixée par /admin
+- [ ] Créer une page "vue des ouvrages" qui affiche les livres activés
+- [ ] Créer des filters
+- [ ] Faire la page "détail d'un ouvrage"
+- [ ] Affcher les commentaires
+- [ ] Permettre de poster un nouveau commentaire
 - [ ] Gérer la validation des formulaires
 
 ### Templates & UI
