@@ -33,9 +33,9 @@ docker compose up -d --build
 - [X] Créer une entité `Book` (id, title, author (qui est un User), enabled, category, description, publishedAt, price)
 - [X] Créer une entité `Category` (id, title)
 - [X] Créer une entité `User` (id, name, email, age, createdAt)
-- [ ] Créer une entité `Comment` (id, author, book, content, createdAt)
-- [ ] Vérifier le mapping avec les attributs `#[RedisOm\Entity]`, `#[RedisOm\Id]`, `#[RedisOm\Property]`
-- [ ] Indexer les champs pertinents pour la recherche (`index: true`)
+- [X] Créer une entité `Comment` (id, author, book, content, createdAt)
+- [X] Vérifier le mapping avec les attributs `#[RedisOm\Entity]`, `#[RedisOm\Id]`, `#[RedisOm\Property]`
+- [X] Indexer les champs pertinents pour la recherche (`index: true`)
 - [ ] Lancer la migration : `bin/console redis-om:migrate`
 
 ### Formulaires & Controllers

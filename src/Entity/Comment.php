@@ -12,10 +12,10 @@ class Comment{
     #[RedisOm\Property]
     public int $id;
 
-    #[RedisOm\Property]
+    #[RedisOm\Property(index: true)]
     public User $author;
 
-    #[RedisOm\Property]
+    #[RedisOm\Property(index: true)]
     public Book $book;
     #[RedisOm\Property]
     public string $content;

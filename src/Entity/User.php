@@ -11,10 +11,10 @@ class User{
     #[RedisOm\Property]
     public int $id;
 
-    #[RedisOm\Property]
+    #[RedisOm\Property(index: true)]
     public string $name;
 
-    #[RedisOm\Property]
+    #[RedisOm\Property(index: true)]
     public string $email;
 
     #[RedisOm\Property]

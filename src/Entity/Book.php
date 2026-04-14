@@ -13,10 +13,10 @@ class Book{
     #[RedisOm\Property]
     public int $id;
 
-    #[RedisOm\Property]
+    #[RedisOm\Property(index: true)]
     public string $title;
 
-    #[RedisOm\Property]
+    #[RedisOm\Property(index: true)]
     public User $author;
 
     #[RedisOm\Property]
@@ -25,7 +25,7 @@ class Book{
     #[RedisOm\Property]
     public bool $enabled;
 
-    #[RedisOm\Property]
+    #[RedisOm\Property(index: true)]
     public Category $cateory;
 
     #[RedisOm\Property]
