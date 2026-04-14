@@ -30,7 +30,7 @@ docker compose up -d --build
 
 ### Entités Redis
 
-- [ ] Créer une entité `Book` (id, title, author (qui est un User), enabled, category, description, publishedAt, price)
+- [X] Créer une entité `Book` (id, title, author (qui est un User), enabled, category, description, publishedAt, price)
 - [ ] Créer une entité `Category` (id, title)
 - [ ] Créer une entité `User` (id, name, email, age, createdAt)
 - [ ] Créer une entité `Comment` (id, author, book, content, createdAt)
