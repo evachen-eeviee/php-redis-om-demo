@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-//use App\Repository\BookRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
 use Talleu\RedisOm\Om\Mapping as RedisOm;
 
