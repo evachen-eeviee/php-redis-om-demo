@@ -22,10 +22,10 @@ docker compose up -d --build
 
 ### Setup initial
 
-- [ ] Installer `talleu/php-redis-om` via Composer
-- [ ] Installer Twig (`symfony/twig-bundle`)
-- [ ] Installer le formulaire Symfony (`symfony/form`, `symfony/validator`)
-- [ ] Enregistrer le bundle dans `config/bundles.php` : `Talleu\RedisOm\Bundle\TalleuRedisOmBundle::class => ['all' => true]`
+- [X] Installer `talleu/php-redis-om` via Composer
+- [X] Installer Twig (`symfony/twig-bundle`)
+- [X] Installer le formulaire Symfony (`symfony/form`, `symfony/validator`)
+- [X] Enregistrer le bundle dans `config/bundles.php` : `Talleu\RedisOm\Bundle\TalleuRedisOmBundle::class => ['all' => true]`
 - [ ] Configurer la connexion Redis (env `REDIS_URL`)
 
 ### Entités Redis
