@@ -40,9 +40,9 @@ docker compose up -d --build
 
 ### Formulaires & Controllers
 
-- [ ] Créer un `BookController` avec CRUD complet (list, create, show, edit, delete)
-- [ ] Créer un `UserController` avec CRUD complet
-- [ ] Créer un `CategoryController` avec CRUD complet
+- [X] Créer un `BookController` avec CRUD complet (list, create, show, edit, delete)
+- [X] Créer un `UserController` avec CRUD complet
+- [X] Créer un `CategoryController` avec CRUD complet
 - [ ] Créer les `FormType` associés (BookType, UserType, CategoryType)
 - [ ] Toute la partie CRUD préfixée par /admin
 - [ ] Créer une page "vue des ouvrages" qui affiche les livres activés
