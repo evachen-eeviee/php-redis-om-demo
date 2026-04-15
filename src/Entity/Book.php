@@ -32,6 +32,6 @@ class Book{
     public float $price;
 
     #[RedisOm\Property(index: true)]
-    public string $publishedAt;
+    public Assert\Date $publishedAt;
 
 }

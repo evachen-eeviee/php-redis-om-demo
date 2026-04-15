@@ -21,6 +21,11 @@ class User{
     public int $age;
 
     #[RedisOm\Property]
-    public Date $createdAt;
+    public \DateTimeImmutable $createdAt;
 
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 }
