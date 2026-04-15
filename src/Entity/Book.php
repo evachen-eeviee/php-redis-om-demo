@@ -26,7 +26,7 @@ class Book{
     public bool $enabled;
 
     #[RedisOm\Property(index: true)]
-    public Category $cateogry;
+    public Category $category;
 
     #[RedisOm\Property(index: true)]
     public float $price;

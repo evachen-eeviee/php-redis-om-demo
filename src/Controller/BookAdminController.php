@@ -24,11 +24,9 @@ class BookAdminController extends AbstractController
     public function new(Request $request, RedisObjectManagerInterface $om):Response
     {
         $book = new Book();
-        $authors = $om->getRepository(User::class)->findAll();
-        $categories = $om->getRepository(Category::class)->findAll();
         $form = $this->createForm(BookType::class, $book, [
-            'authors' => $authors,
-            'categories' => $categories,
+            'authors' => $om->getRepository(User::class)->findAll(),
+            'categories' => $om->getRepository(Category::class)->findAll()
         ]);
         $form->handleRequest($request);
 

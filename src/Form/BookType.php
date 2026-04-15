@@ -24,7 +24,7 @@ class BookType extends AbstractType
                 'label' => 'Titre',
             ])
             ->add('author', ChoiceType::class, [
-                'choices' => $options['authors'],
+                'choices' => (array) $options['authors'],
                 'choice_label' => function(User $user) {
                     return $user->name;
                 },
@@ -32,7 +32,7 @@ class BookType extends AbstractType
                 'label' => 'Auteur',
             ])
             ->add('category', ChoiceType::class, [
-                'choices' => $options['categories'],
+                'choices' => (array) $options['categories'],
                 'choice_label' => function(Category $category) {
                     return $category->category;
                 }
