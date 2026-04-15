@@ -43,18 +43,18 @@ docker compose up -d --build
 - [X] Créer un `BookController` avec CRUD complet (list, create, show, edit, delete)
 - [X] Créer un `UserController` avec CRUD complet
 - [X] Créer un `CategoryController` avec CRUD complet
-- [ ] Créer les `FormType` associés (BookType, UserType, CategoryType)
-- [ ] Toute la partie CRUD préfixée par /admin
+- [X] Créer les `FormType` associés (BookType, UserType, CategoryType)
+- [X] Toute la partie CRUD préfixée par /admin
 - [ ] Créer une page "vue des ouvrages" qui affiche les livres activés
 - [ ] Créer des filters
 - [ ] Faire la page "détail d'un ouvrage"
-- [ ] Affcher les commentaires
+- [ ] Afficher les commentaires
 - [ ] Permettre de poster un nouveau commentaire
 - [ ] Gérer la validation des formulaires
 
 ### Templates & UI
 
-- [ ] Créer un layout de base (`base.html.twig`) avec navigation
+- [X] Créer un layout de base (`base.html.twig`) avec navigation
 - [ ] Templates de listing pour chaque entité
 - [ ] Templates de formulaire (create/edit)
 - [ ] Template de détail (show)
