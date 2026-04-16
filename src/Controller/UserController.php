@@ -29,7 +29,7 @@ class UserController extends AbstractController{
             $om->persist($user);
             $om->flush();
             $this->addFlash('success', 'User créé !');
-            return $this->redirectToRoute('admin_books');
+            return $this->redirectToRoute('admin_index_books');
         }
         return $this->render('user/new.html.twig', ['form'=>$form->createView()]);
     }

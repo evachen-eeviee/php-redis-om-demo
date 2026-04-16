@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 use Talleu\RedisOm\Om\Mapping as RedisOm;
+use Talleu\RedisOm\Om\RedisFormat;
 
 #[RedisOm\Entity]
 class Category{

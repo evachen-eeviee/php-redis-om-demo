@@ -19,15 +19,21 @@ class CategoryAdminController extends AbstractController{
 
     #[Route('/category/new', name: 'admin_category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RedisObjectManagerInterface $om) : Response{
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+
+        //$this->redis
+
+
+
+
+        $form = $this->createForm(CategoryType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $category = $form->getData();
             $om->persist($category);
             $om->flush();
-            $this->addFlash('success', 'Livre créé !');
-            return $this->redirectToRoute('admin_category_index');
+            $this->addFlash('success', 'Catégorie créé !');
+            return $this->redirectToRoute('admin_index_books');
         }
         return $this->render('admin/category/new.html.twig', ['form' => $form->createView()]);
     }
