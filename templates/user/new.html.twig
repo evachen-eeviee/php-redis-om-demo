@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Utilisateur{% endblock %}
+
+{% block body %}
+    <div class="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+        <div class="bg-indigo-600 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Ajouter un Utilisateur</h2>
+        </div>
+
+        {{ form_start(form, {'attr': {'class': 'p-6 space-y-4'}}) }}
+        <div>
+            {{ form_label(form.name, 'Nom complet', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.name, {'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2'}}) }}
+        </div>
+
+        <div>
+            {{ form_label(form.email, 'Adresse Email', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2'}}) }}
+        </div>
+
+        <div>
+            {{ form_label(form.age, 'Âge', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.age, {'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2'}}) }}
+        </div>
+
+        <div class="pt-4">
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition font-medium">
+                Créer l'utilisateur
+            </button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
