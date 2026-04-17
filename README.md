@@ -47,10 +47,10 @@ docker compose up -d --build
 - [X] Toute la partie CRUD préfixée par /admin
 - [ ] Créer une page "vue des ouvrages" qui affiche les livres activés
 - [ ] Créer des filters
-- [ ] Faire la page "détail d'un ouvrage"
+- [X] Faire la page "détail d'un ouvrage"
 - [ ] Afficher les commentaires
 - [ ] Permettre de poster un nouveau commentaire
-- [ ] Gérer la validation des formulaires
+- [X] Gérer la validation des formulaires
 
 ### Templates & UI
 
@@ -72,7 +72,7 @@ docker compose up -d --build
 
 - [ ] Tester le support RedisJSON (stocker des objets imbriqués)
 - [ ] Tester l'auto-expiration (TTL sur les entités)
-- [ ] Tester les types avancés (DateTimeImmutable, arrays, nested objects)
+- [X] Tester les types avancés (DateTimeImmutable, arrays, nested objects)
 - [ ] Créer une page dashboard avec des stats (nombre d'objets par entité)
 
 ### Tests & Validation
