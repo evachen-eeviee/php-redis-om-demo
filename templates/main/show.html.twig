@@ -77,10 +77,62 @@
         </div>
     </div>
 
-    <div class="mt-12">
-        <h3 class="text-2xl font-bold mb-6 text-gray-800">Commentaires lecteurs</h3>
-        <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-            <p class="text-gray-500 italic text-center py-4">Aucun commentaire pour le moment. Soyez le premier à donner votre avis !</p>
+<div class="mt-12">
+    <h3 class="text-2xl font-bold mb-8 text-gray-800 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+        </svg>
+        Commentaires lecteurs
+    </h3>
+
+    {# --- FORMULAIRE DE COMMENTAIRE --- #}
+    <div class="bg-gray-50 rounded-2xl p-6 mb-10 border border-gray-200">
+        <h4 class="text-lg font-semibold mb-4 text-gray-700">Laisser un avis</h4>
+
+        {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+        <div>
+            {{ form_label(form.author, 'Votre nom', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
+            {{ form_widget(form.author, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition', 'placeholder': 'Ex: Jean Dupont'}}) }}
+            <div class="text-red-500 text-xs mt-1">{{ form_errors(form.author) }}</div>
         </div>
+
+        <div>
+            {{ form_label(form.content, 'Votre commentaire', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
+            {{ form_widget(form.content, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition', 'rows': '4', 'placeholder': 'Qu\'avez-vous pensé de cet ouvrage ?'}}) }}
+            <div class="text-red-500 text-xs mt-1">{{ form_errors(form.content) }}</div>
+        </div>
+
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition shadow-md shadow-indigo-100 flex items-center">
+            Publier l'avis
+        </button>
+        {{ form_end(form) }}
     </div>
+
+    {# --- LISTE DES COMMENTAIRES --- #}
+    {#<div class="space-y-6">
+        {% for comment in comments %}
+            <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm transition hover:shadow-md">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center">
+                        <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold mr-3">
+                            {{ comment.author|slice(0, 1)|upper }}
+                        </div>
+                        <div>
+                            <span class="block font-bold text-gray-900">{{ comment.author }}</span>
+                            <span class="text-xs text-gray-400">Le {{ comment.createdAt|date('d/m/Y à H:i') }}</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600 leading-relaxed">
+                    {{ comment.content|nl2br }}
+                </p>
+            </div>
+        {% else %}
+            #}{# Message si aucun commentaire #}{#
+            <div class="bg-white rounded-xl p-10 border border-dashed border-gray-300 shadow-sm">
+                <p class="text-gray-500 italic text-center">Aucun commentaire pour le moment. Soyez le premier à donner votre avis !</p>
+            </div>
+        {% endfor %}
+    </div>#}
+</div>
 {% endblock %}

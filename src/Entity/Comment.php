@@ -21,4 +21,9 @@ class Comment
 
     #[RedisOm\Property]
     public \DateTimeImmutable $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 }
