@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue des livres{% endblock %}
+
+{% block body %}
+    <div class="mb-8 flex justify-between items-center">
+        <h1 class="text-3xl font-extrabold text-gray-900">Notre Catalogue</h1>
+        <span class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium">
+            {% if app.request.attributes.get('_route') != 'admin_index_books' %}
+            {{ books|filter(b => b.enabled == true)|length }} ouvrages disponibles
+            {% else %}
+            {{ books|filter(b => b.enabled == true)|length }} ouvrages disponibles <br>
+            {{ books|filter(b => b.enabled == false)|length }} ouvrages indisponibles
+            {% endif %}
+        </span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for book in books %}
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition duration-300 flex flex-col">
+
+                <div class="aspect-[3/4] bg-gray-100 flex justify-center items-center overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-105 transition duration-500"
+                         src="https://placehold.co/400x600/6366f1/ffffff?text={{ book.title }}"
+                         alt="Couverture de {{ book.title }}">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="mb-2">
+                        <span class="text-[10px] uppercase tracking-widest font-bold text-indigo-500">
+                            {{ book.category.category }}
+                        </span>
+                        <h2 class="text-lg font-bold text-gray-900 leading-tight line-clamp-2 mt-1">
+                            {{ book.title }}
+                        </h2>
+                        <p class="text-sm text-gray-500 mt-1">Par {{ book.author.name }}</p>
+                    </div>
+                    {% if book.enabled == false %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+        <span class="w-2 h-2 mr-1.5 rounded-full bg-red-500"></span>
+        Indisponible
+    </span>
+                    {% else %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+        <span class="w-2 h-2 mr-1.5 rounded-full bg-green-500"></span>
+        Disponible
+    </span>
+                    {% endif %}
+                    <div class="mt-auto pt-4">
+                        <a href="{{ path('admin_book_show', {'id': book.id}) }}"
+                           class="block w-full text-center bg-gray-50 text-indigo-600 font-semibold py-2 rounded-lg hover:bg-indigo-600 hover:text-white transition">
+                            Voir les détails
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-span-full py-20 text-center">
+                <p class="text-gray-400 italic">Aucun livre trouvé dans le catalogue.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

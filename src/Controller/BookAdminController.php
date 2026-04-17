@@ -17,9 +17,17 @@ class BookAdminController extends AbstractController
     #[Route('/admin/books', name: 'admin_index_books', methods: ['GET'])]
     public function index(RedisObjectManagerInterface $om): Response
     {
-        $books = $om->getRepository(Book::class)->findAll();
+        $books = $om->getRepository(Book::class)->findBy([]);
 
-        return $this->render('admin/book/index.html.twig', ['books' => $books]);
+        return $this->render('main/catalogue.html.twig', ['books' => $books]);
+    }
+
+    #[Route('/books', name: 'index_books', methods: ['GET'])]
+    public function indexall(RedisObjectManagerInterface $om): Response
+    {
+        $books = $om->getRepository(Book::class)->findBy([]);
+
+        return $this->render('main/catalogue.html.twig', ['books' => $books]);
     }
 
     #[Route('admin/books/new', name: 'admin_book_new', methods: ['GET', 'POST'])]
@@ -74,9 +82,10 @@ class BookAdminController extends AbstractController
     }
 
     #[Route('/books/{id}', name: 'admin_book_show', methods: ['GET'])]
-    public function show(int $id, RedisObjectManagerInterface $om): Response
+    public function show(string $id, RedisObjectManagerInterface $om): Response
     {
         $book = $om->getRepository(Book::class)->find($id);
+
         if (!$book) {
             throw $this->createNotFoundException('Livre non trouvé');
         }

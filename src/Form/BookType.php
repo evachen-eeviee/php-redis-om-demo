@@ -37,7 +37,13 @@ class BookType extends AbstractType
             ])
             ->add('price', NumberType::class)
             ->add('description', TextareaType::class)
-            ->add('enabled', CheckboxType::class)
+            ->add('enabled', CheckboxType::class, [
+                'label' => 'Rendre le livre visible ?',
+                'required' => false,
+                'attr' => [
+                    'class' => 'rounded border-gray-300 text-indigo-600 focus:ring-indigo-500',
+                ],
+            ])
             ->add('publishedAt', DateType::class, [
                 'widget' => 'single_text',
             ]);
