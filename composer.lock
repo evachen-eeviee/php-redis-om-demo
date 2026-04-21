@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c938c6cbab776e97fbe60a22386aa6ee",
+    "content-hash": "6d489449eb067564a4285da74da899c2",
     "packages": [
         {
             "name": "doctrine/collections",
@@ -5299,16 +5299,16 @@
         },
         {
             "name": "talleu/php-redis-om",
-            "version": "v0.7.0",
+            "version": "v0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clementtalleu/php-redis-om.git",
-                "reference": "42b04e165a11e9fa2f54a7eb3dfae1cba66469ae"
+                "reference": "581debd8237325ed1f9a4e28023bc28f338071c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clementtalleu/php-redis-om/zipball/42b04e165a11e9fa2f54a7eb3dfae1cba66469ae",
-                "reference": "42b04e165a11e9fa2f54a7eb3dfae1cba66469ae",
+                "url": "https://api.github.com/repos/clementtalleu/php-redis-om/zipball/581debd8237325ed1f9a4e28023bc28f338071c6",
+                "reference": "581debd8237325ed1f9a4e28023bc28f338071c6",
                 "shasum": ""
             },
             "require": {
@@ -5353,9 +5353,9 @@
             "description": "A PHP object mapper library for Redis",
             "support": {
                 "issues": "https://github.com/clementtalleu/php-redis-om/issues",
-                "source": "https://github.com/clementtalleu/php-redis-om/tree/v0.7.0"
+                "source": "https://github.com/clementtalleu/php-redis-om/tree/v0.7.1"
             },
-            "time": "2026-04-17T09:37:49+00:00"
+            "time": "2026-04-21T11:49:18+00:00"
         },
         {
             "name": "twig/extra-bundle",

@@ -23,7 +23,7 @@
         "symfony/twig-bundle": "7.4.*",
         "symfony/validator": "7.4.*",
         "symfony/yaml": "7.4.*",
-        "talleu/php-redis-om": "^0.7.0",
+        "talleu/php-redis-om": "^0.7.1",
         "twig/extra-bundle": "^2.12|^3.24",
         "twig/twig": "^2.12|^3.24"
     },
@@ -78,6 +78,6 @@
         }
     },
     "require-dev": {
-        "phpstan/phpstan": "^2.1"
+        "phpstan/phpstan": "^2.1.50"
     }
 }

@@ -117,14 +117,12 @@ class BookAdminController extends AbstractController
         $categories = $om->getRepository(Category::class)->findBy([]);
         $author = $om->getRepository(User::class)->findBy([]);
 
-
         $form = $this->createForm(SearchType::class, $filtre, [
             'categories' => $categories,
             'authors' => $author,
         ]);
         $form->handleRequest($request);
 
-        // On utilise ton service pour filtrer
         $books = $bookRepo->findBySearch($filtre);
 
         return $this->render('main/catalogue.html.twig', [

@@ -16,8 +16,6 @@ class BookRepository
         $this->repository = $om->getRepository(Book::class);
     }
 
-    // src/Repository/BookRepository.php
-
     public function findBySearch(SearchData $search): array
     {
         $criteria = [];
@@ -25,19 +23,16 @@ class BookRepository
         if (!empty($search->title)) {
             $criteria['title'] = $search->title;
         }
-
-//        Fonctionne pas
-        if (!empty($search->author)) {
-            $criteria['author'] = $search->author->name;
+        if (null !== $search->author) {
+            $criteria['author'] = $search->author;
+        }
+        if (null !== $search->category) {
+            $criteria['category'] = $search->category;
         }
 
-        /*FOnctiopnne pas*/
-        if (!empty($search->category)) {
-            $criteria['category'] = $search->category->category;
-        }
 
         if (!empty($criteria)) {
-            $results = $this->repository->findByLike($criteria);
+            $results = $this->repository->findBy($criteria);
         } else {
             $results = $this->repository->findAll();
         }

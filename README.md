@@ -46,7 +46,7 @@ docker compose up -d --build
 - [X] Créer les `FormType` associés (BookType, UserType, CategoryType)
 - [X] Toute la partie CRUD préfixée par /admin
 - [X] Créer une page "vue des ouvrages" qui affiche les livres activés
-- [ ] Créer des filters
+- [X] Créer des filters
 - [X] Faire la page "détail d'un ouvrage"
 - [X] Afficher les commentaires
 - [X] Permettre de poster un nouveau commentaire
@@ -55,8 +55,8 @@ docker compose up -d --build
 ### Templates & UI
 
 - [X] Créer un layout de base (`base.html.twig`) avec navigation
-- [ ] Templates de listing pour chaque entité
-- [ ] Templates de formulaire (create/edit)
+- [X] Templates de listing pour chaque entité
+- [X] Templates de formulaire (create/edit)
 - [X] Template de détail (show)
 - [X] Messages flash pour les actions (create, update, delete)
 
