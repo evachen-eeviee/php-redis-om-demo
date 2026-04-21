@@ -6,6 +6,9 @@ use App\Entity\Book;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Form\BookType;
+use App\Form\SearchType;
+use App\Model\SearchData;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,19 +18,15 @@ use Talleu\RedisOm\Om\RedisObjectManagerInterface;
 class BookAdminController extends AbstractController
 {
     #[Route('/admin/books', name: 'admin_index_books', methods: ['GET'])]
-    public function index(RedisObjectManagerInterface $om): Response
+    public function index(Request $request, RedisObjectManagerInterface $om, BookRepository $repository): Response
     {
-        $books = $om->getRepository(Book::class)->findBy([]);
-
-        return $this->render('main/catalogue.html.twig', ['books' => $books]);
+        return $this->extracted($om, $request, $repository);
     }
 
     #[Route('/books', name: 'index_books', methods: ['GET'])]
-    public function indexall(RedisObjectManagerInterface $om): Response
+    public function indexUser(Request $request, RedisObjectManagerInterface $om, BookRepository $repository): Response
     {
-        $books = $om->getRepository(Book::class)->findBy([]);
-
-        return $this->render('main/catalogue.html.twig', ['books' => $books]);
+        return $this->extracted($om, $request, $repository);
     }
 
     #[Route('admin/books/new', name: 'admin_book_new', methods: ['GET', 'POST'])]
@@ -107,6 +106,30 @@ class BookAdminController extends AbstractController
 
         return $this->render('main/show.html.twig', [
             'book' => $book,
+        ]);
+    }
+
+    #[Route('/admin/books', name: 'admin_index_books', methods: ['GET'])]
+    public function extracted(Request $request, BookRepository $bookRepo, RedisObjectManagerInterface $om): Response
+    {
+        $filtre = new SearchData();
+
+        $categories = $om->getRepository(Category::class)->findBy([]);
+        $author = $om->getRepository(User::class)->findBy([]);
+
+
+        $form = $this->createForm(SearchType::class, $filtre, [
+            'categories' => $categories,
+            'authors' => $author,
+        ]);
+        $form->handleRequest($request);
+
+        // On utilise ton service pour filtrer
+        $books = $bookRepo->findBySearch($filtre);
+
+        return $this->render('main/catalogue.html.twig', [
+            'books' => $books,
+            'form' => $form->createView(),
         ]);
     }
 }

@@ -56,15 +56,21 @@ class CategoryAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/category/{id}', name: 'admin_category_delete', methods: ['DELETE'])]
-    public function delete(Request $request, RedisObjectManagerInterface $om, Category $category): Response
+    #[Route('/category/delete/{id}', name: 'admin_book_delete', methods: ['POST', 'DELETE'])]
+    public function delete(string $id, Request $request, RedisObjectManagerInterface $om, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('category_delete', $request->request->get('_token'))) {
+        $category = $om->getRepository(Category::class)->find($id);
+
+        if ($category) {
             $om->remove($category);
             $om->flush();
+
+            $this->addFlash('success', 'La catégorie a été supprimé définitivement.');
+        } else {
+            $this->addFlash('error', 'La catégorie n\'a pas pu être supprimer');
         }
 
-        return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_index_books', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/category/{id}', name: 'admin_category_show', methods: ['GET'])]

@@ -1,0 +1,57 @@
+{# templates/main/_filter_form.html.twig #}
+{{ form_start(form, {'attr': {'class': 'bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8'}}) }}
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 items-end">
+
+    {# Titre #}
+    <div>
+        {{ form_label(form.title, null, {'label_attr': {'class': 'block text-xs font-semibold text-gray-500 uppercase mb-1'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'w-full rounded-lg border-gray-200 text-sm focus:ring-indigo-500 focus:border-indigo-500', 'placeholder': 'Titre...'}}) }}
+    </div>
+
+    {# Auteur #}
+    <div>
+        {{ form_label(form.author, null, {'label_attr': {'class': 'block text-xs font-semibold text-gray-500 uppercase mb-1'}}) }}
+        {{ form_widget(form.author, {'attr': {'class': 'w-full rounded-lg border-gray-200 text-sm focus:ring-indigo-500 focus:border-indigo-500', 'placeholder': 'Nom...'}}) }}
+    </div>
+
+    {# Catégorie #}
+    <div>
+        {{ form_label(form.category, null, {'label_attr': {'class': 'block text-xs font-semibold text-gray-500 uppercase mb-1'}}) }}
+        {{ form_widget(form.category, {'attr': {'class': 'w-full rounded-lg border-gray-200 text-sm focus:ring-indigo-500 focus:border-indigo-500'}}) }}
+    </div>
+
+    {# Prix Min #}
+    <div>
+        {{ form_label(form.priceMin, 'Prix Min', {'label_attr': {'class': 'block text-xs font-semibold text-gray-500 uppercase mb-1'}}) }}
+        {{ form_widget(form.priceMin, {'attr': {'class': 'w-full rounded-lg border-gray-200 text-sm', 'placeholder': '0€'}}) }}
+    </div>
+
+    {# Prix Max #}
+    <div>
+        {{ form_label(form.priceMax, 'Prix Max', {'label_attr': {'class': 'block text-xs font-semibold text-gray-500 uppercase mb-1'}}) }}
+        {{ form_widget(form.priceMax, {'attr': {'class': 'w-full rounded-lg border-gray-200 text-sm', 'placeholder': '100€'}}) }}
+    </div>
+
+    {# Bouton de validation #}
+    <div class="flex gap-2">
+        <button type="submit" class="flex-1 bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-indigo-700 transition shadow-sm">
+            Filtrer
+        </button>
+        <a href="{{ path(app.request.attributes.get('_route')) }}" class="bg-gray-100 text-gray-600 px-3 py-2 rounded-lg hover:bg-gray-200 transition" title="Réinitialiser">
+            ✕
+        </a>
+    </div>
+</div>
+
+{# On affiche la checkbox indisponible seulement si c'est l'admin #}
+    {% if app.request.attributes.get('_route') == 'admin_index_books' %}
+        <div class="mt-4 flex items-center">
+            {{ form_widget(form.unavailable, {'attr': {'class': 'h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'}}) }}
+            {{ form_label(form.unavailable, null, {'label_attr': {'class': 'ml-2 block text-sm text-gray-700 font-medium'}}) }}
+        </div>
+    {% else %}
+        {# On cache le champ si on est pas admin pour ne pas casser le mapping #}
+        <div class="hidden">{{ form_row(form.unavailable) }}</div>
+    {% endif %}
+
+{{ form_end(form) }}

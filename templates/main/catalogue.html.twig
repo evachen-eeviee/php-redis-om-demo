@@ -17,6 +17,7 @@
             {% endif %}
         </span>
     </div>
+    {{ include('main/filtre.html.twig') }}
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {% if app.request.attributes.get('_route') != 'admin_index_books' %}
@@ -25,11 +26,12 @@
                     {{ include('main/showcata.html.twig') }}
                 {% endif %}
             {% endfor %}
-            {% else %}
+        {% else %}
 
             {% for book in books %}
                 {{ include('main/showcata.html.twig') }}
             {% endfor %}
         {% endif %}
     </div>
+
 {% endblock %}

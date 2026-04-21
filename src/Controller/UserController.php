@@ -56,14 +56,21 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function delete(Request $request, RedisObjectManagerInterface $om, User $user): Response
+    #[Route('/category/delete/{id}', name: 'admin_book_delete', methods: ['POST', 'DELETE'])]
+    public function delete(string $id, Request $request, RedisObjectManagerInterface $om, User $user): Response
     {
-        if ($this->isCsrfTokenValid('user_delete', $request->request->get('_token'))) {
+        $user = $om->getRepository(User::class)->find($id);
+
+        if ($user) {
             $om->remove($user);
             $om->flush();
+
+            $this->addFlash('success', 'L\'utilisateur a été supprimé définitivement.');
+        } else {
+            $this->addFlash('error', 'L\'utilisateur n\'a pas pu être supprimer');
         }
 
-        return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_index_books', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/users/{id}', name: 'user_show', methods: ['GET'])]
