@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,12 +13,12 @@ use Talleu\RedisOm\Om\RedisObjectManagerInterface;
 
 class CategoryAdminController extends AbstractController
 {
-    #[Route('/category', name: 'admin_index_category', methods: ['GET'])]
+    #[Route('/category', name: 'category', methods: ['GET'])]
     public function index(RedisObjectManagerInterface $om): Response
     {
         $category = $om->getRepository(Category::class)->findAll();
 
-        return $this->render('admin/category/index.html.twig', ['category' => $category]);
+        return $this->render('admin/category/category.html.twig', ['category' => $category]);
     }
 
     #[Route('/category/new', name: 'admin_category_new', methods: ['GET', 'POST'])]
@@ -32,13 +33,13 @@ class CategoryAdminController extends AbstractController
             $om->flush();
             $this->addFlash('success', 'Catégorie créé !');
 
-            return $this->redirectToRoute('admin_index_books');
+            return $this->redirectToRoute('category');
         }
 
         return $this->render('admin/category/new.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/category/{id}', name: 'admin_category_edit', methods: ['GET'])]
+    #[Route('/category/edit/{id}', name: 'category_edit', methods: ['GET'])]
     public function edit(Request $request, RedisObjectManagerInterface $om, Category $category): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
@@ -47,17 +48,17 @@ class CategoryAdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $om->flush();
 
-            return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('category', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/category/edit.html.twig', [
+        return $this->render('admin/category/categoryedit.html.twig', [
             'category' => $category,
             'form' => $form,
         ]);
     }
 
-    #[Route('/category/delete/{id}', name: 'admin_book_delete', methods: ['POST', 'DELETE'])]
-    public function delete(string $id, Request $request, RedisObjectManagerInterface $om, Category $category): Response
+    #[Route('/category/delete/{id}', name: 'category_delete', methods: ['POST', 'DELETE'])]
+    public function delete(string $id, RedisObjectManagerInterface $om): Response
     {
         $category = $om->getRepository(Category::class)->find($id);
 
@@ -70,12 +71,24 @@ class CategoryAdminController extends AbstractController
             $this->addFlash('error', 'La catégorie n\'a pas pu être supprimer');
         }
 
-        return $this->redirectToRoute('admin_index_books', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('category', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/category/{id}', name: 'admin_category_show', methods: ['GET'])]
-    public function show(Category $category): Response
+    #[Route('/category/{id}', name: 'category_show', methods: ['GET'])]
+    public function show(string $id,Category $category, RedisObjectManagerInterface $om): Response
     {
-        return $this->render('admin/category/show.html.twig', ['category' => $category]);
+
+        $category = $om->getRepository(Category::class)->find($id);
+
+        if (!$category) {
+            throw $this->createNotFoundException('Catégorie introuvable.');
+        }
+
+        $books = $om->getRepository(Book::class)->findBy(['category' => $category]);
+
+        return $this->render('admin/category/categoryshow.html.twig', [
+            'category' => $category,
+            'books' => $books,
+        ]);
     }
 }
