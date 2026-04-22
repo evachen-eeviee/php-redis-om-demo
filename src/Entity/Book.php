@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use Talleu\RedisOm\Om\Mapping as RedisOm;
+use Talleu\RedisOm\Om\RedisFormat;
 
-#[RedisOm\Entity]
+#[RedisOm\Entity(
+    format: RedisFormat::JSON->value
+)]
 class Book
 {
     #[RedisOm\Id]

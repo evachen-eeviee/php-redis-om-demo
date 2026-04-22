@@ -70,8 +70,8 @@ docker compose up -d --build
 
 ### Fonctionnalités avancées
 
-- [ ] Tester le support RedisJSON (stocker des objets imbriqués)
-- [ ] Tester l'auto-expiration (TTL sur les entités)
+- [X] Tester le support RedisJSON (stocker des objets imbriqués)
+- [X] Tester l'auto-expiration (TTL sur les entités)
 - [X] Tester les types avancés (DateTimeImmutable, arrays, nested objects)
 - [X] Créer une page dashboard avec des stats (nombre d'objets par entité)
 
@@ -79,7 +79,7 @@ docker compose up -d --build
 
 - [X] Vérifier que les objets sont bien persistés dans Redis
 - [X] Vérifier la recherche par critères
-- [ ] Vérifier le tri et la pagination
+- [X] Vérifier le tri et la pagination
 - [X] Vérifier la suppression
 - [X] Vérifier via RedisInsight que les données sont correctes
 

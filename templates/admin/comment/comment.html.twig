@@ -73,6 +73,35 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {% if total_pages > 1 %}
+                <div class="flex justify-center items-center space-x-2 mt-8">
+                    {# Bouton Précédent #}
+                    {% if current_page > 1 %}
+                        <a href="{{ path('comment', { page: current_page - 1}) }}"
+                           class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+                            Précédent
+                        </a>
+                    {% endif %}
+
+                    {# Numéros de pages #}
+                    <div class="flex items-center space-x-1">
+                        {% for i in 1..total_pages %}
+                            <a href="{{ path('comment', { page: i}) }}"
+                               class="px-4 py-2 rounded-lg text-sm font-medium transition {{ i == current_page ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50' }}">
+                                {{ i }}
+                            </a>
+                        {% endfor %}
+                    </div>
+
+                    {# Bouton Suivant #}
+                    {% if current_page < total_pages %}
+                        <a href="{{ path('comment', { page: current_page + 1}) }}"
+                           class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+                            Suivant
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

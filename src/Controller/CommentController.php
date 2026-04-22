@@ -16,11 +16,22 @@ class CommentController extends AbstractController
 {
 
     #[Route('/comment', name: 'comment', methods: ['GET', 'POST'])]
-    public function index(RedisObjectManagerInterface $om): Response
+    public function index(RedisObjectManagerInterface $om, Request $request): Response
     {
-        $comment = $om->getRepository(Comment::class)->findAll();
+        $limit = 10;
+        $currentPage = max(1, $request->query->getInt('page', 1));
+        $comment = $om->getRepository(Comment::class)->findBy([]);
+        $totalComment = count($comment);
+        $totalPages = ceil($totalComment / $limit);
 
-        return $this->render('admin/comment/comment.html.twig', ['comments' => $comment]);
+        $offset = ($currentPage - 1) * $limit;
+        $commentsPage = array_slice($comment, $offset, $limit);
+
+        return $this->render('admin/comment/comment.html.twig', [
+            'comments' => $commentsPage,
+            'total_pages' => $totalPages,
+            'current_page' => $currentPage,
+        ]);
     }
 
     #[Route('/comment/edit/{id}', name: 'comment_edit', methods: ['POST', 'GET'])]
@@ -71,14 +82,21 @@ class CommentController extends AbstractController
             throw $this->createNotFoundException('Livre non trouvé.');
         }
 
-        $comment = new Comment();
+        $limit = 5;
+        $currentPage = max(1, $request->query->getInt('page', 1));
 
+        $allComments = $om->getRepository(Comment::class)->findBy(['book_id' => $book->id]);
+        $totalComments = count($allComments);
+        $totalPages = ceil($totalComments / $limit);
+
+        $offset = ($currentPage - 1) * $limit;
+        $commentsPage = array_slice($allComments, $offset, $limit);
+
+        $comment = new Comment();
         if (!$book instanceof Book) {
-            throw $this->createNotFoundException('Livre non trouvé');
+            throw $this->createNotFoundException('Livre non trouvé.');
         }
         $comment->book = $book;
-
-        $comments = $om->getRepository(Comment::class)->findBy(['book_id' => $book->id]);
 
         $form = $this->createForm(CommentType::class, $comment, [
             'authors' => (array) $om->getRepository(User::class)->findBy([]),
@@ -90,13 +108,14 @@ class CommentController extends AbstractController
             $om->persist($comment);
             $om->flush();
             $this->addFlash('success', 'Commentaire créé !');
-
             return $this->redirectToRoute('admin_book_show', ['id' => $id]);
         }
 
         return $this->render('main/show.html.twig', [
             'book' => $book,
-            'comments' => $comments,
+            'comments' => $commentsPage,
+            'total_pages' => $totalPages,
+            'current_page' => $currentPage,
             'form' => $form->createView(),
         ]);
     }
