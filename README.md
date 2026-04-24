@@ -19,9 +19,26 @@ Projet de démonstration pour la librairie [php-redis-om](https://github.com/cle
 
 ## Installation & Setup
 
-### 1. Spin up the infrastructure
+### 1. Clone the repository
 
-The demo uses docker to streamline the PHP and Redis Stack installation
+#### Fork the repository
+
+To use the demo, you first have to fork the repository to clone it.
+![](/public/fork.png)
+
+Once you created the fork, depending on preferences, you can clone it by using HTTPS or SSH methods by clicking first on the green button named code
+
+![](/public/clone.png)
+
+You have to copy it, then in your terminal, go to the directory where you want the demo to be and clone it
+
+```bash
+git clone [paste your https or ssh here]
+```
+
+### 2. Spin up the infrastructure
+
+The demo uses docker to streamline the PHP and Redis Stack installation, so you need to install it beforehand
 
 ```bash
 docker compose up -d --build
@@ -36,7 +53,7 @@ To access the demo :
 
 - Demo : https://localhost/books
 
-### 3. Library Initialization
+### 4. Library Initialization
 
 If you are starting fresh or updating the library : 
 

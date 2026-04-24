@@ -5,10 +5,12 @@ namespace App\Form;
 use App\Entity\Book;
 use App\Entity\Category;
 use App\Entity\User;
+use App\Model\BookEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,6 +22,15 @@ class BookType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('bookEnum', EnumType::class, [
+                'class' => BookEnum::class,
+                'label' => 'Format du livre',
+                'choice_label' => fn (BookEnum $choice) => match($choice){
+                    BookEnum::BOOK =>'Livre Classique',
+                    BookEnum::POCKET => 'Livre Pocket',
+                    BookEnum::REVUE => 'Magazine',
+                },
+            ])
             ->add('title', TextType::class, [
                 'label' => 'Titre',
             ])

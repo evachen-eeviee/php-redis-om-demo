@@ -15,4 +15,5 @@ class SearchData
     public bool $unavailable = false;
     public ?float $priceMin = null;
     public ?float $priceMax = null;
+    public ?BookEnum $enum = null;
 }

@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\User;
 use App\Form\BookType;
 use App\Form\SearchType;
+use App\Model\BookEnum;
 use App\Model\SearchData;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -66,7 +67,7 @@ class BookAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $om->persist($book);
+            $om->merge($book);
             $om->flush();
 
             return $this->redirectToRoute('admin_index_books', [], Response::HTTP_SEE_OTHER);

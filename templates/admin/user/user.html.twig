@@ -77,6 +77,28 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="flex justify-center items-center space-x-2 mt-8">
+                {% if paginator.hasPreviousPage %}
+                    <a href="?page={{ paginator.currentPage - 1 }}"
+                       class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+                        Previous
+                    </a>
+                {% endif %}
+
+                <div class="flex items-center space-x-1">
+                    {% for i in 1..paginator.totalPages %}
+                        <span class="px-4 py-2 rounded-lg text-sm font-medium transition {{ i == paginator.currentPage  ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50' }}"> {{ i }}  </span>
+                    {% endfor %}
+                </div>
+
+
+                {% if paginator.hasNextPage %}
+                    <a href="?page={{ paginator.currentPage + 1 }}"
+                       class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+                        Next
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

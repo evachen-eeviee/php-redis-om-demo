@@ -13,11 +13,24 @@ use Talleu\RedisOm\Om\RedisObjectManagerInterface;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'user', methods: ['GET', 'POST'])]
-    public function index(RedisObjectManagerInterface $om): Response
+    public function index(Request $request, RedisObjectManagerInterface $om): Response
     {
-        $users = $om->getRepository(User::class)->findAll();
 
-        return $this->render('admin/user/user.html.twig', ['users' => $users]);
+
+        $repository = $om->getRepository(User::class);
+
+        $page = $request->query->getInt('page', 1);
+
+        $paginator = $repository->paginate(
+            criteria: [],
+            page: $page,
+            itemsPerPage: 8,
+        );
+
+        return $this->render('admin/user/user.html.twig', [
+            'paginator' => $paginator,
+            'users' => $paginator->getItems(),
+        ]);
     }
 
     #[Route('/user/new', name: 'user_new', methods: ['GET', 'POST'])]
@@ -46,7 +59,10 @@ class UserController extends AbstractController
         if (!$user) {
             throw $this->createNotFoundException('Aucun utilisateur nommé Justine trouvé.');
         }
+        $users = $userRepo->findMultiple([1862976071218001,1863085144589098,1862976157719200]);
+
         return $this->render('admin/user/justine.html.twig', [
+            'users' => $users,
             'user' => $user,
         ]);
     }
@@ -60,7 +76,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $om->persist($user);
+            $om->merge($user);
             $om->flush();
 
             return $this->redirectToRoute('user', [], Response::HTTP_SEE_OTHER);

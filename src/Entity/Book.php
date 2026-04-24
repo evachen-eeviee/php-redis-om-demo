@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\BookEnum;
 use Talleu\RedisOm\Om\Mapping as RedisOm;
 use Talleu\RedisOm\Om\RedisFormat;
 
@@ -31,6 +32,9 @@ class Book
 
     #[RedisOm\Property(index: true)]
     public float $price;
+
+    #[RedisOm\Property(index: true)]
+    public BookEnum $bookEnum;
 
     #[RedisOm\Property(index: true)]
     public \DateTimeImmutable $publishedAt;

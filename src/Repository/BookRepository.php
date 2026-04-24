@@ -31,24 +31,24 @@ class BookRepository
         if ($search->unavailable) {
             $criteria['enabled'] = false;
         }
+        if($search->enum){
+            $criteria['bookEnum'] = $search->enum->value;
+        }
 
         if (!empty($criteria)) {
             $results = $this->repository->findBy($criteria, ['price' => 'ASC']);
         } else {
             $results = $this->repository->findAll();
         }
-
         $books = iterator_to_array($results);
 
 
-        if (null !== $search->priceMin || null !== $search->priceMax) {
-            $books = array_filter($books, function (Book $book) use ($search) {
-                $price = $book->price;
-                $minOk = null === $search->priceMin || $price >= $search->priceMin;
-                $maxOk = null === $search->priceMax || $price <= $search->priceMax;
 
-                return $minOk && $maxOk;
-            });
+
+
+        if (null !== $search->priceMin || null !== $search->priceMax) {
+            $results = $this->repository->findBy(['price' => ['$gte' => $search->priceMin, '$lte' => $search->priceMax]]);
+            $books = iterator_to_array($results);
             $books = array_values($books);
         }
 

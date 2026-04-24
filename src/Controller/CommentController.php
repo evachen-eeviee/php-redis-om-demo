@@ -45,7 +45,7 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $om->persist($comment);
+            $om->merge($comment);
             $om->flush();
 
             return $this->redirectToRoute('comment', [], Response::HTTP_SEE_OTHER);

@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\User;
+use App\Model\BookEnum;
 use App\Model\SearchData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,6 +37,15 @@ class SearchType extends AbstractType
                 'label' => 'Catégorie',
                 'placeholder' => 'Choisir la catégorie',
                 'required' => false,
+            ])
+            ->add('enum', EnumType::class, [
+                'class' => BookEnum::class,
+                'label' => 'Format du livre',
+                'choice_label' => fn (BookEnum $choice) => match($choice){
+                    BookEnum::BOOK =>'Livre Classique',
+                    BookEnum::POCKET => 'Livre Pocket',
+                    BookEnum::REVUE => 'Magazine',
+                },
             ])
             ->add('unavailable', CheckboxType::class, [
                 'label' => 'Indisponible',
