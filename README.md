@@ -10,18 +10,18 @@ Projet de démonstration pour la librairie [php-redis-om](https://github.com/cle
 - **Admin Interface** : Complete back-office under /adùin using Symfony Forms
 - **Developer Experience** : Seamless integratrion with the RedisObjectManager
 
-## Stack technique
+## 🛠️ Stack technique
 
 - **PHP 8.4** (FrankenPHP)
 - **Symfony 7.4**
 - **Redis Stack** (Redis + RediSearch + RedisJSON)
 - **php-redis-om** (talleu/php-redis-om)
 
-## Installation & Setup
+## 📝 Installation & Setup
 
 ### 1. Clone the repository
 
-#### Fork the repository
+#### Fork the repository 🍴
 
 To use the demo, you first have to fork the repository to clone it.
 ![](/public/fork.png)
@@ -53,7 +53,7 @@ To access the demo :
 
 - Demo : https://localhost/books
 
-### 4. Library Initialization
+### 3. Library Initialization
 
 If you are starting fresh or updating the library : 
 
@@ -78,15 +78,16 @@ bin/console redis-om:migrate
 ```
 Depending on your configuration, use phpredis or Predis
 
-## How to Use the Demo
+## 🎯 How to Use the Demo 
 
 ### Entity Mapping
 Entities are located in src/Entity
 
 ```php
-#[RedisOm\Entity]
+//------------------------------------------Exemple-------------------------------------//
+#[RedisOm\Entity] // To declare an entity
 class Book {
-    #[RedisOm\Id]
+    #[RedisOm\Id] // Id is automatically created
     #[RedisOm\Property]
     public int $id;
 
@@ -102,6 +103,7 @@ class Book {
 In your controllers (src/Controller), the RedisObjectManagerInterface is injected to handle data via forms
 
 ```php
+//------------------------------------------Exemple-------------------------------------//
 public function create(RedisObjectManagerInterface $manager) {
     $book = new Book();
     $form = $this->createForm(BookType::class, $book);
@@ -128,6 +130,7 @@ The library supports standard Symfony Form Types. Because the entities use stand
 They are used to create object in Redis.
 
 ```php
+//------------------------------------------Exemple-------------------------------------//
 class BookType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -149,6 +152,7 @@ class BookType extends AbstractType
 Use the Repository to fetch your data : 
 
 ```php
+//------------------------------------------Exemple-------------------------------------//
 $repository = $manager->getRepository(Book::class);
 
 // Get everything
@@ -161,3 +165,42 @@ $books = $repository->findBy(
     10 // Limit
 );
 ```
+
+## 🛣️ Every Route and Their Function
+
+**User** :
+
+*User*
+- **https://localhost/user/new** : Create a new user
+
+*Book*
+- **https://localhost/books** : List of Book enabled
+  - **https://localhost/books/{id}**: Show the book with this id, you can comment on this page
+
+
+**Admin** :
+
+*Category*  
+- **https://localhost/category** : List of all created category, you can delete them or show all the book with this category
+  - **https://localhost/category/{id}** : List of books which has this category
+  - **https://localhost/category/new** : Create a new category
+
+*Book*
+- **https://localhost/admin/books** : List of all the books, enabled or not
+  - **https://localhost/admin/books/new** : Create a book
+  - **https://localhost/books/edit/{id}** : Edit a book with this specific id, you can delete them if they are disabled
+
+*User*
+- **https://localhost/user** : List of all created user, you can delete and edit them
+  - **https://localhost/user/edit/{id}** : Edit a user with this specific id
+- **https://localhost/justine** : Use of findOneBy on a user withe the name Justine, and usage of findMultiple with user id (if you want to test it you have to change the id)
+
+*Comment*
+
+- **https://localhost/comment** :  List of all created comment, you can delete or edit them
+  - **https://localhost/comment/edit/{id}** : Edit a comment with this specific id
+
+*Dashboard*
+
+- **https://localhost/dashboard** : Show how many data of each entity we have
+

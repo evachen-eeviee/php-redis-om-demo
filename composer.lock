@@ -7592,12 +7592,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clementtalleu/php-redis-om.git",
-                "reference": "83d376f3f946a5df7243b1100a3657f2ba7982f8"
+                "reference": "d7fdb7ae26df71bc66dd8ab9146f1123bfda8945"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clementtalleu/php-redis-om/zipball/83d376f3f946a5df7243b1100a3657f2ba7982f8",
-                "reference": "83d376f3f946a5df7243b1100a3657f2ba7982f8",
+                "url": "https://api.github.com/repos/clementtalleu/php-redis-om/zipball/d7fdb7ae26df71bc66dd8ab9146f1123bfda8945",
+                "reference": "d7fdb7ae26df71bc66dd8ab9146f1123bfda8945",
                 "shasum": ""
             },
             "require": {
@@ -7644,7 +7644,7 @@
                 "issues": "https://github.com/clementtalleu/php-redis-om/issues",
                 "source": "https://github.com/clementtalleu/php-redis-om/tree/chore/v1"
             },
-            "time": "2026-04-24T11:50:02+00:00"
+            "time": "2026-04-24T13:42:29+00:00"
         },
         {
             "name": "theseer/tokenizer",
